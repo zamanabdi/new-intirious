@@ -45,6 +45,20 @@ header{
 
 }
 
+.cartIcon-wrapper{
+    /* border:2px solid red; */
+    position:relative;
+}
+.cartIcon-wrapper p{
+    position: absolute;
+    top:-17px;
+    right:-18px;
+    padding: 2px 7px;
+    border-radius: 15px;
+    background-color: tomato;
+    color: white;
+}
+
 
 
 

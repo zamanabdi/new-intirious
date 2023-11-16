@@ -3,10 +3,15 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import logo from "../../assets/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ImCross } from "react-icons/im";
+import {useSelector} from "react-redux";
 import "./header.css";
+
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+
+  const {cartItems} = useSelector((state) => state.cart);
+  console.log(cartItems);
 
   return (
     <header className="header">
@@ -21,8 +26,18 @@ const Header = () => {
         <span>About</span>
         <span>Contact Us</span>
         <span>Login</span>
-        <span>
+
+        <span className="cartIcon-wrapper">
           <AiOutlineShoppingCart size={"25px"} />
+          {
+            cartItems.length>0 && <p>
+            {
+              cartItems.reduce((acc,currEl) => acc + currEl.qty,0)
+            }
+            </p>
+          }
+          
+          
         </span>
       </nav>
 
