@@ -11,7 +11,6 @@ import {
   Card,
 } from "react-bootstrap";
 import { FaTrash } from "react-icons/fa";
-import Message from "../components/message/Message";
 import { addToCart, removeFromCart } from "../slices/cartSlice";
 import "./cartScreen.css";
 
@@ -23,107 +22,112 @@ const CartScreen = () => {
 
   const { cartItems } = cart;
 
-  const addToCartHandler = async(product,qty) => {
-    dispatch(addToCart({...product,qty}));
+  const addToCartHandler = async (product, qty) => {
+    dispatch(addToCart({ ...product, qty }));
+  };
 
-  }
-
-  const removeFromCartHandler = async(id) => {
+  const removeFromCartHandler = async (id) => {
     dispatch(removeFromCart(id));
-
-  }
+  };
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=/shipping');
-  }
+    navigate("/login?redirect=/shipping");
+  };
 
   return (
-    <Row>
-      <Col md={8}>
+    <div className="cartScreen-wrapper">
+      <div className="cartItems-wrapper">
+        {/* heading */}
         <h1 style={{ margin: "20px 15px", fontFamily: "sans-serif" }}>
           Shopping Cart
         </h1>
+
         {cartItems.length === 0 ? (
           <div className="empty-msg">
             Your cart is empty <Link to="/">Go Back</Link>
           </div>
         ) : (
-          <ListGroup variant="flush">
+          <div>
             {cartItems.map((item) => (
-              <ListGroup.Item key={item._id}>
-                <Row>
-                {/* image */}
-                  <Col md={2}>
+              <div key={item._id} className="one-item">
+                <div className="cartItem-card">
+                  {/* image */}
+                  <div className="cartImage-wrapper">
                     <Image src={item.image} alt={item.name} fluid rounded />
-                  </Col>
+                  </div>
 
-                  {/* item title */}
-                  <Col md={3}>
-                    <Link to={`/product/${item._id}`}>{item.name}</Link>
-                  </Col>
+                  <div className="cartItem-info">
+                    {/* item title */}
+                    <div className="cartItem-title">
+                      <Link to={`/product/${item._id}`}>{item.name}</Link>
+                    </div>
 
-                  {/* item price */}
-                  <Col md={2}>&#8377;{item.price}</Col>
+                    {/* item price */}
+                    <div className="cartItem-price">&#8377;{item.price}</div>
 
-                  {/* set the quantity */}
-                  <Col md={2}>
-                    <Form.Control
-                      as="select"
-                      value={item.qty}
-                      onChange={(e) => addToCartHandler(item,Number(e.target.value))}
-                    >
-                      {[...Array(item.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
-                          {x + 1}
-                        </option>
-                      ))}
-                    </Form.Control>
-                  </Col>
+                    {/* set the quantity */}
+                    <div className="cartItem-qty">
+                      <Form.Control
+                        as="select"
+                        value={item.qty}
+                        onChange={(e) =>
+                          addToCartHandler(item, Number(e.target.value))
+                        }
+                      >
+                        {[...Array(item.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </div>
 
-                  {/* delete button */}
-                  <Col md={2}>
-                    <Button type="button" variant="light"
-                    onClick={() => removeFromCartHandler(item._id)}>
-                      <FaTrash />
-                    </Button>
-                  </Col>
-
-
-                </Row>
-              </ListGroup.Item>
+                    {/* delete button */}
+                    <div className="cartItem-delete">
+                      <Button
+                        type="button"
+                        variant="light"
+                        onClick={() => removeFromCartHandler(item._id)}
+                      >
+                        <FaTrash />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             ))}
-          </ListGroup>
+          </div>
         )}
-      </Col>
+      </div>
 
-      <Col md={4}>
-        <Card>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
-                items
-              </h2>
-              &#8377;
-              {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
-                .toFixed(2)}
-            </ListGroup.Item>
+      <div className="subtotal-wrapper">
+          {/* subtotal info div */}
+          <div className="subtotal-info-div">
+            <h2>
+              Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+              items
+            </h2>
+            <span>
+            &#8377;
+            {cartItems
+              .reduce((acc, item) => acc + item.qty * item.price, 0)
+              .toFixed(2)}
+            </span>
+            
+          </div>
 
-            <ListGroup.Item>
-              <Button
-                type="button"
-                className="btn-block"
-                disabled={cartItems.length === 0}
-                onClick={checkoutHandler}
-              >
-                Proceed to checkout
-              </Button>
-            </ListGroup.Item>
-          </ListGroup>
-        </Card>
-      </Col>
-    </Row>
+          {/* proceed to checkout button div */}
+          <div className="checkout-btn-wrapper">
+            <button
+              disabled={cartItems.length === 0}
+              onClick={checkoutHandler}
+            >
+              Proceed to checkout
+            </button>
+          </div>
+        
+      </div>
+    </div>
   );
 };
 
