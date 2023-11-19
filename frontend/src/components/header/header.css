@@ -116,6 +116,16 @@ header{
     .mobile-nav-menu span{
         font-size: 25px;
     }
+
+    .cartIcon-wrapper p{
+        position: absolute;
+        top:-17px;
+        right:-18px;
+        padding: 2px 5px;
+        border-radius: 15px;
+        background-color: tomato;
+        color: white;
+    }
   }
 
 

@@ -54,9 +54,19 @@ const Header = () => {
           <span>About</span>
           <span>Contact Us</span>
           <span>Login</span>
-          <span>
-            <AiOutlineShoppingCart size={"30px"} />
-          </span>
+          
+          <span className="cartIcon-wrapper">
+          <AiOutlineShoppingCart size={"25px"} />
+          {
+            cartItems.length>0 && <p>
+            {
+              cartItems.reduce((acc,currEl) => acc + currEl.qty,0)
+            }
+            </p>
+          }
+          
+          
+        </span>
         </nav>
       )}
 
