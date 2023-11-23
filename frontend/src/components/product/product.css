@@ -1,7 +1,7 @@
 .card-wrapper{
     /* border: 2px solid yellow; */
-    height: 450px;
-    width: 350px;
+    height: 500px;
+    width: 400px;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 2px 5px 10px 3px rgba(0,0,0,0.2);
@@ -30,9 +30,7 @@
     padding: 5px 5px;
     font-family: 'Roboto', sans-serif;
     font-size: 20px;
-    color: rgba(0,0,0,0.8);
-    
-    
+    color: rgba(0,0,0,0.8);   
 }
 
 .card-title p{
@@ -44,7 +42,7 @@
 
 .card-price{
     /* border:2px solid red; */
-    margin-top: 5px;
+    /* margin-top: 2px; */
     padding: 10px 10px;
     font-family: 'Roboto', sans-serif;
     font-size: 18px;
@@ -56,7 +54,7 @@
 
 .card-rating{
     /* border: 2px solid red; */
-    margin-top: 5px;
+    /* margin-top: 2px; */
     padding: 10px 10px;
     font-family: 'Roboto', sans-serif;
 }
